@@ -1,4 +1,4 @@
-const z = require('zod')
+import z from 'zod'
 
 const movieSchema = z.object({
   title: z.string({
@@ -13,7 +13,7 @@ const movieSchema = z.object({
     message: 'Poster must be a valid URL'
   }),
   genre: z.array(
-    z.enum(['Action', 'Adventure', 'Animation', 'Crime', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Thriller', 'Sci-Fi']),
+    z.enum(['Action', 'Adventure', 'Crime', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Thriller', 'Sci-Fi']),
     {
       required_error: 'Movie genre is required.',
       invalid_type_error: 'Movie genre must be an array of enum Genre'
@@ -21,15 +21,10 @@ const movieSchema = z.object({
   )
 })
 
-function validateMovie (input) {
+export function validateMovie (input) {
   return movieSchema.safeParse(input)
 }
 
-function validatePartialMovie (input) {
+export function validatePartialMovie (input) {
   return movieSchema.partial().safeParse(input)
-}
-
-module.exports = {
-  validateMovie,
-  validatePartialMovie
 }
