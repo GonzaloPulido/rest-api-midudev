@@ -2,10 +2,8 @@ const express = require('express') // require -> commonJS
 
 const crypto = require('node:crypto')
 const cors = require('cors')
-
 const app = express()
 const movies = require('./movies.json')
-const { raw } = require('body-parser')
 const { validateMovie, validatePartialMovie } = require('./schemas/movies')
 app.use(express.json())
 app.disable('x-powered-by')
